@@ -1,0 +1,19 @@
+@import "../../colors";
+
+.input-controller-container {
+  margin: 10px 0;
+
+
+  label.form-label {
+    color: $black;
+
+    span.required {
+      color: $requiredRed;
+      font-weight: bold;
+    }
+  }
+
+  input.form-control, textarea.form-control {
+    //border-radius: 0;
+  }
+}

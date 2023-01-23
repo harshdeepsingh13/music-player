@@ -1,0 +1,13 @@
+@import "src/colors";
+
+.login-container {
+  .login-error-container {
+    text-align: center;
+    padding: 10px 0;
+    margin: 15px 0;
+    color: $requiredRed;
+    background-color: rgba($requiredRed, 0.2);
+    border: thin solid rgba($requiredRed, 0.6);
+    border-radius: 5px;
+  }
+}

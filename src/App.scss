@@ -1,0 +1,15 @@
+.container{
+  padding: 0 15px;
+}
+
+.action-btn-container{
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  text-transform: capitalize;
+
+  .btn{
+    margin: 5px 15px;
+    text-transform: capitalize;
+  }
+}

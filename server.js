@@ -19,6 +19,7 @@ const port = process.env.PORT || 8001;
 mongooseConnection();
 
 //middlewares
+app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 

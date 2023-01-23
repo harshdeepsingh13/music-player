@@ -1,0 +1,26 @@
+@import "src/colors";
+
+.loader-container {
+  display: flex;
+  align-items: center;
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  .loader {
+
+    &.blue {
+      background-color: $blue !important;
+    }
+
+    &.pink {
+      background-color: $pink !important;
+    }
+  }
+
+  .loader-message {
+    margin-left: 10px;
+    opacity: 0.7;
+  }
+}

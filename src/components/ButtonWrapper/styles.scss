@@ -1,0 +1,8 @@
+@import "../../colors";
+
+.btn{
+  &.btn-primary{
+    color: $white;
+    font-weight: bold;
+  }
+}
