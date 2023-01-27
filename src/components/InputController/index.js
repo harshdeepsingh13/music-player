@@ -16,6 +16,7 @@ const InputController = ({
 	                         preFixText,
 	                         required,
 	                         onChange,
+	                         onKeyDown,
 	                         isInvalid,
 	                         invalidMessage
                          }) => {
@@ -27,6 +28,9 @@ const InputController = ({
 			onChange(value)
 	}
 
+	const handleKeyPress = (event) => {
+		onKeyDown(event);
+	}
 
 	return <>
 		<div className="input-controller-container">
@@ -46,6 +50,7 @@ const InputController = ({
 						aria-disabled={disabled}
 						aria-required={required}
 						onChange={handleChange}
+						onKeyDown={handleKeyPress}
 						isInvalid={isInvalid}
 					/>
 					{
@@ -113,6 +118,7 @@ const componentPropTypes = {
 	disabled: PropTypes.bool,
 	required: PropTypes.bool,
 	onChange: PropTypes.func,
+	onKeyDown: PropTypes.func,
 	isInvalid: PropTypes.bool,
 	invalidMessage: PropTypes.string,
 };
@@ -126,6 +132,8 @@ const componentDefaultProps = {
 	required: false,
 	isInvalid: false,
 	onChange: () => {
+	},
+	onKeyDown: () => {
 	}
 }
 

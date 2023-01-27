@@ -1,6 +1,7 @@
 const logger = require('../services/logger');
 
 module.exports = (err, req, res, next) => {
+	console.log("err", err);
 	logger.error(`[ errorMiddleware.js ] Error occurred --- ${err}`)
 	if (req.error) {
 		const {

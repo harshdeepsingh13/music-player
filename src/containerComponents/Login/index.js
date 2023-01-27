@@ -74,6 +74,12 @@ const Login = props => {
 		}
 	};
 
+	const handleEnterKeyPress = useCallback(({key}) => {
+		if (key === "Enter") {
+			onLoginClick();
+		}
+	}, [onLoginClick]);
+
 	return <>
 		<div className="login-container">
 			{registerUserLoader && <FullPageLoader message={"Fetching your details"}/>}
@@ -91,6 +97,7 @@ const Login = props => {
 				placeholder={"Enter your registered Email"}
 				label={"Email"}
 				onChange={value => changeValue(IDS.EMAIL, value, setEmail)}
+				onKeyDown={handleEnterKeyPress}
 				isInvalid={errorFields.includes(IDS.EMAIL)}
 				invalidMessage={ERROR_MESSAGES.REQUIRED_FIELD}
 			/>
@@ -103,6 +110,7 @@ const Login = props => {
 				placeholder={"Enter your Password"}
 				label={"Password"}
 				onChange={value => changeValue(IDS.PASSWORD, value, setPassword)}
+				onKeyDown={handleEnterKeyPress}
 				isInvalid={errorFields.includes(IDS.PASSWORD)}
 				invalidMessage={ERROR_MESSAGES.REQUIRED_FIELD}
 			/>

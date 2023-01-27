@@ -32,7 +32,7 @@ exports.loginUserController = async (req, res, next) => {
 	try {
 		const {email, password} = req.body;
 
-		const user = await getUserDetails({email, password}, true);
+		const user = await getUserDetails({email, password}, null, {matchPassword: true});
 
 		if (!user) {
 			req.error = {status: 404, message: "Email/Password combination doesn't match"};
@@ -40,10 +40,27 @@ exports.loginUserController = async (req, res, next) => {
 		}
 
 		const jwtToken = encode({email: user.email});
-		res.status(200).json({token: jwtToken, message: `User found, and logged in!`});
+		console.log("user.email", user.email);
+		res.status(200).json({data: {token: jwtToken}, message: `User found, and logged in!`});
 
 	} catch (e) {
 		req.error = {status: 500, message: "An Error occurred!"}
 		return next(new Error(e.message));
 	}
 }
+
+exports.getUserDetailsController = async (req, res, next) => {
+	try {
+		const {email} = req.user;
+		let userDetails = await getUserDetails({email}, {_id: 0, email: 1, firstName: 1, lastName: 1});
+		userDetails._doc.name = `${userDetails.lastName}, ${userDetails.firstName}`;
+		// console.log("userDetails", JSON.stringify(userDetails, null, 2));
+		console.log("userDetails.name", Object.keys(userDetails));
+		res.status(200).json({message: "User Details fetched", data: userDetails})
+
+	} catch (e) {
+		req.error = {status: 500, message: "An Error occurred!"}
+		return next(new Error(e.message));
+	}
+}
+

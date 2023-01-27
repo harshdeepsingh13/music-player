@@ -8,7 +8,7 @@ export const useUserContext = () => useContext(UserContext);
 
 const UserContextProvider = ({children}) => {
 
-	const [state, setState] = useState({userDetails: {}});
+	const [state, setState] = useState({userDetails: null});
 
 	const [registerUserLoader, setRegisterUserLoader] = useState(false);
 	const [fetchUserDetailsLoader, setFetchUserDetailsLoader] = useState(false);

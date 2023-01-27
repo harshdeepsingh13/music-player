@@ -10,8 +10,7 @@ export const registerUserAPI = (data) => axios({
 	data
 });
 
-export const fetchUserDetailsAPI = () => {
-};
+export const fetchUserDetailsAPI = () => axiosInstance({method: "GET", url: API_ROUTES.USER_DETAILS})
 export const loginUserAPI = (data) => axios({
 	method: "POST",
 	url: API_ROUTES.BASE_URL_V1 + API_ROUTES.LOGIN_USER,

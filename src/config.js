@@ -8,12 +8,16 @@ export const ERROR_MESSAGES = {
 
 export const EMAIL_REGEX = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-export const LOCAL_STORAGE_KEY = {TOKEN: "auth_token"};
+export const LOCAL_STORAGE_KEY = {
+	TOKEN: "auth_token",
+	USER_DETAILS: "user_details"
+};
 
 export const API_ROUTES = {
 	BASE_URL_V1: "/api/v1",
 	REGISTER_USER: "/user/register",
-	LOGIN_USER: "/user/login"
+	LOGIN_USER: "/user/login",
+	USER_DETAILS: "/user"
 };
 
 export const LOADER_ORIENTATION = {VERTICAL: "vertical", HORIZONTAL: "horizontal"};

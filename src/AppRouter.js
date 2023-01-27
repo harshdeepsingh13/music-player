@@ -8,10 +8,10 @@ const AppRouter = props => {
 return <>
     <Routes>
         {
-            routes.map(({path, component: Component, isPrivate}) => <Route
+            routes.map(({path, component: Component, ...rest}) => <Route
                     path={path}
                     element={
-                        <RouteWrapper isPrivate={isPrivate}>
+                        <RouteWrapper {...rest}>
                             <Component/>
                         </RouteWrapper>
                     }
