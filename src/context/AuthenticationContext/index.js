@@ -1,5 +1,5 @@
 import React, {createContext, useCallback, useContext, useEffect, useMemo, useState} from 'react';
-import {getToken, removeToken} from "../../services/localStorage";
+import {getToken, removeToken, removeUserDetailsLS} from "../../services/localStorage";
 
 export const AuthenticationContext = createContext({});
 
@@ -13,6 +13,7 @@ const AuthenticationContextProvider = ({children}) => {
 
 	const logoutUser = useCallback(() => {
 		removeToken();
+		removeUserDetailsLS();
 		window.location.href = "/";
 	}, []);
 

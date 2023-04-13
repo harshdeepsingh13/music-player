@@ -12,6 +12,10 @@ export const removeToken = () => {
 	return localStorage.removeItem(LOCAL_STORAGE_KEY.TOKEN)
 }
 
+export const removeUserDetailsLS = () => {
+	return localStorage.removeItem(LOCAL_STORAGE_KEY.USER_DETAILS);
+}
+
 export const getUserDetailsLS = () => {
 	const data = localStorage.getItem(LOCAL_STORAGE_KEY.USER_DETAILS);
 	return data ? JSON.parse(data) : null;
