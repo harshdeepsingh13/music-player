@@ -6,13 +6,21 @@ import {useAuthenticationContext} from "../../context/AuthenticationContext";
 import {uploadAudio} from "../../services/cloudinary";
 import UploadNewAudio from "../../components/UploadNewAudio";
 import AllMedia from "../../components/AllMedia";
+import {useMediaContext} from "../../context/MediaContext";
+import FullPageLoader from "../../components/FullPageLoader";
 
 const Home = props => {
 
 	const {isAuthorized} = useAuthenticationContext();
+	const {loaders, actions} = useMediaContext();
+	const {uploadMediaLoader} = loaders;
+	const {uploadMedia} = actions;
 
 	return <>
-		<UploadNewAudio/>
+		{
+			uploadMediaLoader && <FullPageLoader message={"Uploading Audio"} />
+		}
+		<UploadNewAudio uploadMedia={uploadMedia}/>
 		<AllMedia/>
 		<UnderDevelopment isLoggedIn={isAuthorized}/>
 	</>

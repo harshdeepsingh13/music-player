@@ -1,0 +1,31 @@
+@import "src/colors";
+
+.upload-new-audio-controller {
+  display: flex;
+  justify-content: flex-end;
+
+  input {
+    display: none;
+  }
+
+  label {
+    background-color: $secondary;
+    color: $white;
+    font-size: 1.2em;
+    padding: 10px 40px;
+    width: 20%;
+    min-width: 280px;
+    margin: 15px 0;
+    border: 3px solid darken($secondary, 10);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color ease-in-out 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &:hover {
+      background-color: darken($secondary, 5);
+    }
+  }
+}

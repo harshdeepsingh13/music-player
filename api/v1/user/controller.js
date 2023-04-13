@@ -1,4 +1,4 @@
-const {addNewUser, getUserDetails} = require("./model");
+const {addNewUser, getUserDetails, updateUser} = require("./model");
 const {encryptPassword, comparePassword} = require("../../../services/password");
 const {encode} = require("../../../services/jwt");
 
@@ -52,7 +52,13 @@ exports.loginUserController = async (req, res, next) => {
 exports.getUserDetailsController = async (req, res, next) => {
 	try {
 		const {email} = req.user;
-		let userDetails = await getUserDetails({email}, {_id: 0, email: 1, firstName: 1, lastName: 1});
+		let userDetails = await getUserDetails({email}, {
+			_id: 0,
+			email: 1,
+			firstName: 1,
+			lastName: 1,
+			rollbackSeconds: 1
+		});
 		userDetails._doc.name = `${userDetails.lastName}, ${userDetails.firstName}`;
 		// console.log("userDetails", JSON.stringify(userDetails, null, 2));
 		console.log("userDetails.name", Object.keys(userDetails));
@@ -64,3 +70,15 @@ exports.getUserDetailsController = async (req, res, next) => {
 	}
 }
 
+exports.updateUserDetailsController = async (req, res, next) => {
+	try {
+		const {_id} = req.user;
+		const toUpdateUser = req.body.details;
+		const user = await updateUser(_id, toUpdateUser);
+		user._doc.name = `${user._doc.lastName}, ${user._doc.firstName}`
+		res.status(200).json({message: "User details updated successfully", data: {user}})
+	} catch (e) {
+		req.error = {status: 500, message: "An Error occurred!"}
+		return next(new Error(e.message));
+	}
+}

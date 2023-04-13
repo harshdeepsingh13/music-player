@@ -1,9 +1,11 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
 import {createPortal} from "react-dom";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useUserContext} from "../../context/UserContext";
+import {getUserDetailsLS} from "../../services/localStorage";
 
 const MediaPlayer = ({
 	                     isShown,
@@ -13,6 +15,15 @@ const MediaPlayer = ({
                      }) => {
 
 	const audioPlayerRef = useRef(undefined);
+	const {rollbackSeconds} = getUserDetailsLS();
+
+	useEffect(
+		() => {
+			if (isShown)
+				playMedia();
+		},
+		[isShown]
+	);
 
 	const playMedia = () => {
 		audioPlayerRef.current.play();
@@ -38,7 +49,7 @@ const MediaPlayer = ({
 		}
 	}
 	const onPlayerWrapperDoubleClick = () => {
-		seekMedia();
+		seekMedia(rollbackSeconds);
 	}
 
 	return <>

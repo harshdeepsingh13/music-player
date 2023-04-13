@@ -38,3 +38,10 @@ export const renameMediaAPI = (id, name) => axiosInstance({
 	url: API_ROUTES.RENAME_MEDIA(id),
 	data: {name}
 })
+
+export const updateDetailsAPI = updateDetails =>
+	axiosInstance({
+		method: "PUT",
+		url: API_ROUTES.UPDATE_USER,
+		data: {details: updateDetails}
+	})

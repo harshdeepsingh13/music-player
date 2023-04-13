@@ -38,7 +38,6 @@ const AllMedia = props => {
 
 	return <>
 		{fetchMediaLoader && <FullPageLoader message={"Getting your media!"}/>}
-		{JSON.stringify(mediaActionsLoader, null, 2)}
 		<div className="all-media-container">
 			{
 				media.map(item => <MediaItem

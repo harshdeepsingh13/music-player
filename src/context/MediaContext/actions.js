@@ -1,8 +1,26 @@
-import {deleteMediaAPI, fetchMediaAPI, renameMediaAPI} from "../../services/axios";
+import {deleteMediaAPI, fetchMediaAPI, renameMediaAPI, uploadAudioAPI} from "../../services/axios";
 
 export default (state, updateState, loaderSetters, pushToast) => {
-	const {setFetchMediaLoader} = loaderSetters;
+	const {
+		setFetchMediaLoader,
+		updateMediaActionsLoader,
+		setUploadMediaLoader
+	} = loaderSetters;
 	return {
+		uploadMedia: async (file) => {
+			try {
+				setUploadMediaLoader(true);
+				const formData = new FormData();
+				formData.append("music", file)
+				const {data: {data}} = await uploadAudioAPI(formData);
+				updateState({media: [{...data.newAudio}, ...state.media]})
+				pushToast({text: "Media Uploaded successfully", variant: "success"})
+			} catch (e) {
+				pushToast({text: e?.response?.data?.message || "An error occurred!", variant: "danger"})
+			} finally {
+				setUploadMediaLoader(false);
+			}
+		},
 		fetchMedia: async () => {
 			try {
 				setFetchMediaLoader(true);
@@ -16,19 +34,19 @@ export default (state, updateState, loaderSetters, pushToast) => {
 		},
 		deleteMedia: async (musicId, successCallback) => {
 			try {
-				loaderSetters.updateMediaActionsLoader(true, musicId);
+				updateMediaActionsLoader(true, musicId);
 				await deleteMediaAPI(musicId);
 				successCallback && successCallback();
 				pushToast({text: "Media deleted successfully", variant: "success"})
 			} catch (e) {
 				pushToast({text: e?.response?.data?.message || "An error occurred!", variant: "danger"})
 			} finally {
-				loaderSetters.updateMediaActionsLoader(false, musicId);
+				updateMediaActionsLoader(false, musicId);
 			}
 		},
 		renameMedia: async (musicId, name, successCallback) => {
 			try {
-				loaderSetters.updateMediaActionsLoader(true, musicId);
+				updateMediaActionsLoader(true, musicId);
 				const {data: {data}} = await renameMediaAPI(musicId, name)
 				const toUpdateIndex = state.media.findIndex(({_id}) => _id === data.music._id);
 				updateState({
@@ -43,7 +61,7 @@ export default (state, updateState, loaderSetters, pushToast) => {
 			} catch (e) {
 				pushToast({text: e?.response?.data?.message || "An error occurred!", variant: "danger"})
 			} finally {
-				loaderSetters.updateMediaActionsLoader(false, musicId);
+				updateMediaActionsLoader(false, musicId);
 			}
 		}
 	};

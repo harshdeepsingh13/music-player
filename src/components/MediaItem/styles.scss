@@ -2,8 +2,8 @@
 
 .media-item-container {
   cursor: pointer;
-  flex-basis: 30%;
-  margin: 10px 2.5%;
+  flex-basis: 32%;
+  margin: 10px 1%;
   position: relative;
   user-select: none;
 
@@ -11,11 +11,11 @@
     pointer-events: none;
   }
 
-  &:first-child, &:nth-child(4) {
+  &:first-child, &:nth-child(3n+1) {
     margin-left: 0;
   }
 
-  &:last-child, &:nth-child(3) {
+  &:last-child, &:nth-child(3n) {
     margin-right: 0;
   }
 

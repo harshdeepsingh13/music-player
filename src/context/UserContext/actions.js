@@ -1,4 +1,4 @@
-import {fetchUserDetailsAPI, loginUserAPI, registerUserAPI} from "../../services/axios";
+import {fetchUserDetailsAPI, loginUserAPI, registerUserAPI, updateDetailsAPI} from "../../services/axios";
 import {setToken, setUserDetails} from "../../services/localStorage";
 
 export default (state, updateState, loaderSetters, pushToast) => {
@@ -36,9 +36,22 @@ export default (state, updateState, loaderSetters, pushToast) => {
 			try {
 				loaderSetters.setFetchUserDetailsLoader(true);
 				const {data: {data: userDetails}} = await fetchUserDetailsAPI();
-				setUserDetails({name: userDetails.name});
-				await updateState({userDetails});
-				successCallback && successCallback({name: userDetails.name})
+				setUserDetails({name: userDetails.name, rollbackSeconds: userDetails.rollbackSeconds});
+				updateState({userDetails});
+				successCallback && successCallback(userDetails);
+			} catch (e) {
+				pushToast({text: e?.response?.data?.message || "An error occurred!", variant: "danger"})
+			} finally {
+				loaderSetters.setFetchUserDetailsLoader(false);
+			}
+		},
+		updateUser: async (updateDetails, successCallback) => {
+			try {
+				loaderSetters.setFetchUserDetailsLoader(true);
+				const {data: {data: {user}}} = await updateDetailsAPI(updateDetails)
+				updateState({user});
+				setUserDetails({name: user.name, rollbackSeconds: user.rollbackSeconds});
+				successCallback && successCallback(user);
 			} catch (e) {
 				pushToast({text: e?.response?.data?.message || "An error occurred!", variant: "danger"})
 			} finally {

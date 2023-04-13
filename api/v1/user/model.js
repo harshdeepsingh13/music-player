@@ -21,3 +21,11 @@ exports.getUserDetails = async (filter, projection = {}, matchPassword = false) 
 	}
 	return User.findOne({...filter, isActive: true}, finalProjection);
 };
+
+exports.updateUser = (userId, toUpdate) => {
+	return User.findOneAndUpdate(
+		{_id: userId, isActive: true},
+		{...toUpdate},
+		{new: true}
+	)
+}

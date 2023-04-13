@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 
 const Music = musicSchema.getModel();
 
-exports.getMusic = (userId) => Music.find({userId, isActive: true}, {userId: 0})
+exports.getMusic = (userId) => Music.find(
+	{userId, isActive: true},
+	{userId: 0},
+	{sort: {updatedAt: -1}}
+)
 
 exports.saveUpload = async (userId, uploadedAudio, originalFileName) => {
 

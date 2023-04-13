@@ -12,6 +12,7 @@ const MediaContextProvider = ({children}) => {
 
 	const [fetchMediaLoader, setFetchMediaLoader] = useState(false);
 	const [mediaActionsLoader, setMediaActionsLoader] = useState({loader: false, ids: []});
+	const [uploadMediaLoader, setUploadMediaLoader] = useState(false);
 
 	const {pushToast} = useToastContext();
 
@@ -38,7 +39,7 @@ const MediaContextProvider = ({children}) => {
 	const enhancedActions = useMemo(() => actions(
 		state,
 		updateState,
-		{setFetchMediaLoader, updateMediaActionsLoader},
+		{setFetchMediaLoader, updateMediaActionsLoader, setUploadMediaLoader},
 		pushToast
 	), [state, updateState]);
 
@@ -46,8 +47,8 @@ const MediaContextProvider = ({children}) => {
 	const value = useMemo(() => ({
 		actions: enhancedActions,
 		state,
-		loaders: {fetchMediaLoader, mediaActionsLoader}
-	}), [enhancedActions, state, fetchMediaLoader, mediaActionsLoader]);
+		loaders: {fetchMediaLoader, mediaActionsLoader, uploadMediaLoader}
+	}), [enhancedActions, state, fetchMediaLoader, mediaActionsLoader, uploadMediaLoader]);
 
 	return <>
 		<MediaContext.Provider value={value}>

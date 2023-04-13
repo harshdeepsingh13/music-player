@@ -21,7 +21,6 @@ const MediaItem = ({
 	const [isPlayerShown, setIsPlayerShown] = useState(false);
 	const [isRenameState, setIsRenameState] = useState(false);
 
-
 	const containerRef = useRef(undefined);
 
 	const onMediaClick = () => {

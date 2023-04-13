@@ -1,20 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './styles.scss';
 import PropTypes from 'prop-types';
-import {uploadAudio} from "../../services/cloudinary";
+import {faUpload} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const UploadNewAudio = props => {
-
-	const [file, setFile] = useState();
+const UploadNewAudio = ({uploadMedia}) => {
 
 	return <>
-		<div className="uploadNewAudioContainer">
+		<div className="upload-new-audio-controller">
+			<label htmlFor="file">
+				<FontAwesomeIcon icon={faUpload}/>
+				Upload a Audio
+			</label>
 			<input
-                type="file"
-                name="file"
-                id="file"
-                onChange={({target: {files}}) => setFile(files[0])}/>
-			<input type="button" value="submit" onClick={() => uploadAudio(file)}/>
+				type="file"
+				name="file"
+				id="file"
+				onChange={({target: {files}}) => uploadMedia(files[0])}
+				accept={".mp3"}
+			/>
+			<input type="button" value="submit"/>
 		</div>
 	</>
 };

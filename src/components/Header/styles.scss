@@ -1,5 +1,32 @@
+@import "src/colors";
+
 .header-container {
   position: sticky;
-  top:0;
-  z-index: 99;
+  top: 0;
+  z-index: 999;
+  background-color: $white;
+  //box-shadow: 1px -14px 20px 4px $black;
+  box-shadow: 1px -14px 20px 4px $primaryDark;
+
+  .logo-banner-container {
+    margin: unset;
+    .logo-banner {
+      width: 300px;
+    }
+  }
+
+  .rollback-seconds-container {
+    display: flex;
+    align-items: center;
+
+    select {
+      margin: 0 5px;
+    }
+  }
+
+  .nav-item.dropdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

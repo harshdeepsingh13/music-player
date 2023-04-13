@@ -18,6 +18,7 @@ export const API_ROUTES = {
 	REGISTER_USER: "/user/register",
 	LOGIN_USER: "/user/login",
 	USER_DETAILS: "/user",
+	UPDATE_USER: "/user",
 	UPLOAD_AUDIO: "/music",
 	FETCH_MEDIA: "/music",
 	DELETE_MEDIA: (id) => `/music/${id}`,
