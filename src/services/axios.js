@@ -16,3 +16,25 @@ export const loginUserAPI = (data) => axios({
 	url: API_ROUTES.BASE_URL_V1 + API_ROUTES.LOGIN_USER,
 	data
 });
+
+export const fetchMediaAPI = () => axiosInstance({
+	method: "GET",
+	url: API_ROUTES.FETCH_MEDIA
+})
+
+export const uploadAudioAPI = (data) => axiosInstance({
+	method: "POST",
+	url: API_ROUTES.UPLOAD_AUDIO,
+	data
+})
+
+export const deleteMediaAPI = (id) => axiosInstance({
+	method: "DELETE",
+	url: API_ROUTES.DELETE_MEDIA(id)
+})
+
+export const renameMediaAPI = (id, name) => axiosInstance({
+	method: "PUT",
+	url: API_ROUTES.RENAME_MEDIA(id),
+	data: {name}
+})

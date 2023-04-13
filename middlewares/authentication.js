@@ -1,7 +1,7 @@
 const {decode} = require("../services/jwt");
 const {getUserDetails} = require("../api/v1/user/model");
 
-module.exports = () => async (req, res, next) => {
+module.exports = async (req, res, next) => {
 	if (!req.headers.authorization) {
 		req.error = {
 			status: 400, message: "Authentication token required."

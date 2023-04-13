@@ -373,3 +373,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+uploads/
+
+build/

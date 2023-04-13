@@ -1,0 +1,52 @@
+@import "src/colors";
+
+.media-context-menu-container {
+  position: fixed;
+  z-index: 99;
+  box-shadow: 0 0 21px -3px $gray;
+  border-radius: 5px;
+  overflow: hidden;
+  border: thin solid $lightGray;
+
+  ul {
+    list-style: none;
+    background-color: $white;
+    margin: unset;
+    padding: unset;
+    width: 125px;
+
+    li {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      border-bottom: thin solid $lightGray;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+
+      &:last-child {
+        border-bottom: unset;
+      }
+
+      &:hover {
+        background-color: rgba($lightGray, 0.6);
+      }
+
+      .icon {
+        width: 15px;
+        margin-right: 10px;
+      }
+
+      .rename-icon {
+        color: $primaryDark;
+      }
+
+      .delete-icon {
+        color: $requiredRed;
+      }
+
+      .menu-text {
+        color: $gray;
+      }
+    }
+  }
+}

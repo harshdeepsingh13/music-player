@@ -17,7 +17,11 @@ export const API_ROUTES = {
 	BASE_URL_V1: "/api/v1",
 	REGISTER_USER: "/user/register",
 	LOGIN_USER: "/user/login",
-	USER_DETAILS: "/user"
+	USER_DETAILS: "/user",
+	UPLOAD_AUDIO: "/music",
+	FETCH_MEDIA: "/music",
+	DELETE_MEDIA: (id) => `/music/${id}`,
+	RENAME_MEDIA: id => `/music/rename/${id}`
 };
 
 export const LOADER_ORIENTATION = {VERTICAL: "vertical", HORIZONTAL: "horizontal"};
