@@ -22,7 +22,6 @@ const Home = props => {
 		}
 		<UploadNewAudio uploadMedia={uploadMedia}/>
 		<AllMedia/>
-		<UnderDevelopment isLoggedIn={isAuthorized}/>
 	</>
 };
 

@@ -7,6 +7,7 @@ import {useUserContext} from "../../context/UserContext";
 import {ERROR_MESSAGES, ROUTE_PATH} from "../../config";
 import FullPageLoader from "../../components/FullPageLoader";
 import {useNavigate} from "react-router-dom";
+import LogoBanner from "../../components/LogoBanner";
 
 const IDS = {EMAIL: "email"}
 
@@ -82,7 +83,11 @@ const Login = props => {
 
 	return <>
 		<div className="login-container">
-			{registerUserLoader && <FullPageLoader message={"Fetching your details"}/>}
+			{
+				registerUserLoader &&
+				<FullPageLoader message={"Fetching your details"}/>
+			}
+			<LogoBanner width={"75%"}/>
 			{
 				loginError.isError &&
 				<div className="login-error-container">
@@ -116,7 +121,12 @@ const Login = props => {
 			/>
 
 			<div className="action-btn-container">
-				<ButtonWrapper variant={"outline-primary"} onClick={onLoginClick}>Login</ButtonWrapper>
+				<ButtonWrapper variant={"primary"} onClick={onLoginClick}>
+					Login
+				</ButtonWrapper>
+				<ButtonWrapper variant={"outline-secondary"} onClick={() => navigate(ROUTE_PATH.SIGNUP)}>
+					Don't have an account? Sign Up here!
+				</ButtonWrapper>
 			</div>
 		</div>
 	</>

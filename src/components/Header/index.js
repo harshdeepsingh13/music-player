@@ -10,7 +10,7 @@ import {getUserDetailsLS} from "../../services/localStorage";
 import {useAuthenticationContext} from "../../context/AuthenticationContext";
 import {faArrowRotateLeft} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import LogoBanner from "../../assets/images/logo-banner.png"
+import LogoBanner from "../LogoBanner";
 
 const Header = props => {
 
@@ -54,8 +54,8 @@ const Header = props => {
 		<Navbar className={"header-container"} expand="lg">
 			<Container>
 				<Navbar.Brand onClick={() => navigate(ROUTE_PATH.INDEX)}>
-					<h2 style={{textAlign: "center"}} className={"logo-banner-container"}>
-						<img src={LogoBanner} alt="Unconventional Player Logo" className={"logo-banner"}/>
+					<h2 style={{textAlign: "center"}} className={"logo-header-container"}>
+						<LogoBanner width={"300px"}/>
 					</h2>
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav"/>

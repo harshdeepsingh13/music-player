@@ -1,6 +1,9 @@
 @import "src/colors";
 
 .login-container {
+  padding-top: 50px;
+  width: 80%;
+  margin: auto;
   .login-error-container {
     text-align: center;
     padding: 10px 0;

@@ -7,6 +7,7 @@ import ButtonWrapper from "../../components/ButtonWrapper";
 import {useNavigate} from "react-router-dom";
 import {useUserContext} from "../../context/UserContext";
 import FullPageLoader from "../../components/FullPageLoader";
+import LogoBanner from "../../components/LogoBanner";
 
 const IDS = {
 	FIRST_NAME: "firstName",
@@ -139,72 +140,74 @@ const SignUp = props => {
 	}
 
 	return <>
-		{registerUserLoader && <FullPageLoader message={"Creating your user, Hang Tight!"}/>}
-		<InputController
-			type={"text"}
-			id={IDS.FIRST_NAME}
-			label={"First Name"}
-			placeholder={"Enter your First name"}
-			required={requiredFields.includes(IDS.FIRST_NAME)}
-			value={firstName}
-			onChange={value => changeValue(IDS.FIRST_NAME, value, setFirstName)}
-			isInvalid={errorFields.includes(IDS.FIRST_NAME)}
-			invalidMessage={ERROR_MESSAGES.REQUIRED_FIELD}
-		/>
+		<div className="signup-container">
+			<LogoBanner width={"75%"}/>
+			{registerUserLoader && <FullPageLoader message={"Creating your user, Hang Tight!"}/>}
+			<InputController
+				type={"text"}
+				id={IDS.FIRST_NAME}
+				label={"First Name"}
+				placeholder={"Enter your First name"}
+				required={requiredFields.includes(IDS.FIRST_NAME)}
+				value={firstName}
+				onChange={value => changeValue(IDS.FIRST_NAME, value, setFirstName)}
+				isInvalid={errorFields.includes(IDS.FIRST_NAME)}
+				invalidMessage={ERROR_MESSAGES.REQUIRED_FIELD}
+			/>
 
-		<InputController
-			type={"text"}
-			id={IDS.LAST_NAME}
-			label={"Last Name"}
-			placeholder={"Enter your Last name"}
-			required={requiredFields.includes(IDS.LAST_NAME)}
-			value={lastName}
-			onChange={value => changeValue(IDS.LAST_NAME, value, setLastName)}
-			isInvalid={errorFields.includes(IDS.LAST_NAME)}
-			invalidMessage={ERROR_MESSAGES.REQUIRED_FIELD}
-		/>
+			<InputController
+				type={"text"}
+				id={IDS.LAST_NAME}
+				label={"Last Name"}
+				placeholder={"Enter your Last name"}
+				required={requiredFields.includes(IDS.LAST_NAME)}
+				value={lastName}
+				onChange={value => changeValue(IDS.LAST_NAME, value, setLastName)}
+				isInvalid={errorFields.includes(IDS.LAST_NAME)}
+				invalidMessage={ERROR_MESSAGES.REQUIRED_FIELD}
+			/>
 
-		<InputController
-			type={"email"}
-			id={IDS.EMAIL}
-			label={"Email"}
-			placeholder={"Enter your Email"}
-			required={requiredFields.includes(IDS.EMAIL)}
-			value={email}
-			onChange={value => changeValue(IDS.EMAIL, value, setEmail)}
-			isInvalid={errorFields.includes(IDS.EMAIL)}
-			invalidMessage={!isEmailValid ? ERROR_MESSAGES.EMAIL_FORMAT_INVALID : ERROR_MESSAGES.REQUIRED_FIELD}
-		/>
+			<InputController
+				type={"email"}
+				id={IDS.EMAIL}
+				label={"Email"}
+				placeholder={"Enter your Email"}
+				required={requiredFields.includes(IDS.EMAIL)}
+				value={email}
+				onChange={value => changeValue(IDS.EMAIL, value, setEmail)}
+				isInvalid={errorFields.includes(IDS.EMAIL)}
+				invalidMessage={!isEmailValid ? ERROR_MESSAGES.EMAIL_FORMAT_INVALID : ERROR_MESSAGES.REQUIRED_FIELD}
+			/>
 
-		<InputController
-			type={"password"}
-			id={IDS.PASSWORD}
-			label={"Password"}
-			placeholder={"Enter Password"}
-			required={requiredFields.includes(IDS.PASSWORD)}
-			value={password}
-			onChange={value => changeValue(IDS.PASSWORD, value, setPassword)}
-			isInvalid={errorFields.includes(IDS.PASSWORD)}
-			invalidMessage={!isPasswordMatching ? ERROR_MESSAGES.PASSWORD_NOT_MATCHING : ERROR_MESSAGES.REQUIRED_FIELD}
-		/>
+			<InputController
+				type={"password"}
+				id={IDS.PASSWORD}
+				label={"Password"}
+				placeholder={"Enter Password"}
+				required={requiredFields.includes(IDS.PASSWORD)}
+				value={password}
+				onChange={value => changeValue(IDS.PASSWORD, value, setPassword)}
+				isInvalid={errorFields.includes(IDS.PASSWORD)}
+				invalidMessage={!isPasswordMatching ? ERROR_MESSAGES.PASSWORD_NOT_MATCHING : ERROR_MESSAGES.REQUIRED_FIELD}
+			/>
 
-		<InputController
-			type={"password"}
-			id={IDS.CONFIRM_PASSWORD}
-			label={"Confirm Password"}
-			placeholder={"Enter Confirm Password"}
-			required={requiredFields.includes(IDS.CONFIRM_PASSWORD)}
-			value={confirmPassword}
-			onChange={value => changeValue(IDS.CONFIRM_PASSWORD, value, setConfirmPassword)}
-			isInvalid={errorFields.includes(IDS.CONFIRM_PASSWORD)}
-			invalidMessage={!isPasswordMatching ? ERROR_MESSAGES.PASSWORD_NOT_MATCHING : ERROR_MESSAGES.REQUIRED_FIELD}
-		/>
+			<InputController
+				type={"password"}
+				id={IDS.CONFIRM_PASSWORD}
+				label={"Confirm Password"}
+				placeholder={"Enter Confirm Password"}
+				required={requiredFields.includes(IDS.CONFIRM_PASSWORD)}
+				value={confirmPassword}
+				onChange={value => changeValue(IDS.CONFIRM_PASSWORD, value, setConfirmPassword)}
+				isInvalid={errorFields.includes(IDS.CONFIRM_PASSWORD)}
+				invalidMessage={!isPasswordMatching ? ERROR_MESSAGES.PASSWORD_NOT_MATCHING : ERROR_MESSAGES.REQUIRED_FIELD}
+			/>
 
-		<div className="action-btn-container">
-			<ButtonWrapper variant={"outline-secondary"} onClick={onBackClick}>Back</ButtonWrapper>
-			<ButtonWrapper onClick={onUserRegister}>Sign Up</ButtonWrapper>
+			<div className="action-btn-container">
+				<ButtonWrapper variant={"outline-secondary"} onClick={onBackClick}>Back</ButtonWrapper>
+				<ButtonWrapper onClick={onUserRegister}>Sign Up</ButtonWrapper>
+			</div>
 		</div>
-
 	</>
 };
 

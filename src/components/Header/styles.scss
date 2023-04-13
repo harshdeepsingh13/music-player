@@ -8,11 +8,12 @@
   //box-shadow: 1px -14px 20px 4px $black;
   box-shadow: 1px -14px 20px 4px $primaryDark;
 
-  .logo-banner-container {
+  .navbar-brand{
+    cursor: pointer;
+  }
+
+  .logo-header-container {
     margin: unset;
-    .logo-banner {
-      width: 300px;
-    }
   }
 
   .rollback-seconds-container {
