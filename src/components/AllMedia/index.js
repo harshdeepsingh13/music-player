@@ -40,15 +40,19 @@ const AllMedia = props => {
 		{fetchMediaLoader && <FullPageLoader message={"Getting your media!"}/>}
 		<div className="all-media-container">
 			{
-				media.map(item => <MediaItem
-					key={item._id}
-					id={item._id}
-					fullUrl={item.fullUrl}
-					originalFileName={item.originalFileName}
-					handleDelete={handleDelete}
-					handleRename={handleRename}
-					isActionLoader={mediaActionsLoader.loader && mediaActionsLoader.ids.includes(item._id)}
-				/>)
+				media.length > 0 ?
+					media.map(item => <MediaItem
+						key={item._id}
+						id={item._id}
+						fullUrl={item.fullUrl}
+						originalFileName={item.originalFileName}
+						handleDelete={handleDelete}
+						handleRename={handleRename}
+						isActionLoader={mediaActionsLoader.loader && mediaActionsLoader.ids.includes(item._id)}
+					/>) :
+					<div className="no-media-container">
+						No Media Available
+					</div>
 			}
 		</div>
 	</>
