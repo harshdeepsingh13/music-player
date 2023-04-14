@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import {createPortal} from "react-dom";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useUserContext} from "../../context/UserContext";
 import {getUserDetailsLS} from "../../services/localStorage";
+import useLongClick from "../hooks/useLongClick";
 
 const MediaPlayer = ({
 	                     isShown,
@@ -17,13 +17,9 @@ const MediaPlayer = ({
 	const audioPlayerRef = useRef(undefined);
 	const {rollbackSeconds} = getUserDetailsLS();
 
-	useEffect(
-		() => {
-			if (isShown)
-				playMedia();
-		},
-		[isShown]
-	);
+	const seekMedia = (seekSeconds = 10, toBeginning = false) => {
+		audioPlayerRef.current.currentTime -= toBeginning ? audioPlayerRef.current.currentTime : seekSeconds;
+	}
 
 	const playMedia = () => {
 		audioPlayerRef.current.play();
@@ -31,15 +27,6 @@ const MediaPlayer = ({
 	const pauseMedia = () => {
 		audioPlayerRef.current.pause();
 	}
-	const seekMedia = (seekSeconds = 10, toBeginning = false) => {
-		audioPlayerRef.current.currentTime -= toBeginning ? audioPlayerRef.current.currentTime : seekSeconds;
-	}
-	const handleClose = (e) => {
-		e.stopPropagation();
-		onClose();
-		seekMedia(undefined, true)
-		pauseMedia();
-	};
 
 	const onPlayerWrapperClick = () => {
 		if (audioPlayerRef.current.paused) {
@@ -48,17 +35,36 @@ const MediaPlayer = ({
 			pauseMedia();
 		}
 	}
-	const onPlayerWrapperDoubleClick = () => {
-		seekMedia(rollbackSeconds);
-	}
+
+	const longClickEvents = useLongClick({
+		threshold: 500,
+		thresholdBetweenIterations: 1000,
+		onStart: () => pauseMedia(),
+		whileClick: () => seekMedia(rollbackSeconds),
+		onFinish: () => playMedia(),
+		normalClick: onPlayerWrapperClick
+	});
+
+	useEffect(
+		() => {
+			if (isShown)
+				playMedia();
+		},
+		[isShown]
+	);
+	const handleClose = (e) => {
+		e.stopPropagation();
+		onClose();
+		seekMedia(undefined, true)
+		pauseMedia();
+	};
 
 	return <>
 		<div
 			className={`media-player-container ${isShown ? "visible" : "invisible"}`}
 			key={id}
 			id={id}
-			onClick={onPlayerWrapperClick}
-			onDoubleClick={onPlayerWrapperDoubleClick}
+			{...longClickEvents}
 		>
 			<div id="close-btn" className="close" onClick={handleClose}>
 				<FontAwesomeIcon icon={faCircleXmark} size={"2x"}/>
@@ -71,7 +77,7 @@ const MediaPlayer = ({
 				<ul>
 					<li>Press close button at the top to close this player</li>
 					<li>Click anywhere on this screen to toggle play and pause</li>
-					<li>Double click to seek back 10 seconds</li>
+					<li>Long Click anywhere for about 500ms to seek back {rollbackSeconds} seconds</li>
 				</ul>
 			</div>
 		</div>
