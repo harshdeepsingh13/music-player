@@ -1,4 +1,4 @@
-const musicSchema = require("../../../schemas/music");
+const musicSchema = require("../../../schemas/Music");
 const mongoose = require("mongoose");
 
 const Music = musicSchema.getModel();
