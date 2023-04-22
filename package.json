@@ -1,8 +1,8 @@
 {
-  "name": "music-player",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8001",
+  "name": "unconventional-player",
+  "version": "1.0.0",
+  "description": "An unconventional player that uses gestures to control the music",
+  "main": "server.js",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
@@ -36,17 +36,21 @@
     "server:start": "nodemon server.js",
     "dev:start": "concurrently \"npm run server:start\" \"npm run client:start\"",
     "postinstall": "npm run build",
-    "start": "npm run build && node server.js",
+    "start": "npm run build && MODE=production node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harshdeepsingh13/music-player.git"
   },
+  "author": "Harshdeep Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harshdeepsingh13/music-player/issues"
+  },
+  "homepage": "./",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -58,9 +62,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^7.6.0",
-    "nodemon": "^2.0.20"
   }
 }
