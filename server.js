@@ -20,7 +20,7 @@ mongooseConnection();
 
 //middlewares
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: true, limit: "50mb"}));
 app.use(morgan('dev'));
 app.use(cors());
 
