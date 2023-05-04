@@ -37,7 +37,7 @@
     "server:start": "nodemon server.js",
     "dev:start": "concurrently \"npm run server:start\" \"npm run client:start\"",
     "postinstall": "npm run build",
-    "start": "npm run build && MODE=production node server.js",
+    "start": "npm run build && MODE=production forever start server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
