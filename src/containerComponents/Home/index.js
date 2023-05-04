@@ -11,7 +11,6 @@ import FullPageLoader from "../../components/FullPageLoader";
 
 const Home = props => {
 
-	const {isAuthorized} = useAuthenticationContext();
 	const {loaders, actions} = useMediaContext();
 	const {uploadMediaLoader} = loaders;
 	const {uploadMedia} = actions;

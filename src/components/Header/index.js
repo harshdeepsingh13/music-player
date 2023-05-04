@@ -22,26 +22,28 @@ const Header = props => {
 	const {fetchUserDetailsLoader} = loaders;
 	const {userDetails} = state;
 
-	const {logoutUser} = useAuthenticationContext();
+	const {logoutUser, isAuthorized} = useAuthenticationContext();
 	const isMounted = useRef(false);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!isMounted.current) {
-			const userDetailsLS = getUserDetailsLS();
-			if (!(userDetails || userDetailsLS?.name || userDetailsLS?.rollbackSeconds)) {
-				const successCallback = ({name, rollbackSeconds}) => {
-					setName(name);
-					setRollbackSeconds(rollbackSeconds)
-				};
-				fetchUserDetails(successCallback);
-			} else {
-				setName(userDetails?.name || userDetailsLS?.name || "Error")
-				setRollbackSeconds(userDetails?.rollbackSeconds || userDetailsLS?.rollbackSeconds || 0)
+			if (isAuthorized) {
+				const userDetailsLS = getUserDetailsLS();
+				if (!(userDetails || userDetailsLS?.name || userDetailsLS?.rollbackSeconds)) {
+					const successCallback = ({name, rollbackSeconds}) => {
+						setName(name);
+						setRollbackSeconds(rollbackSeconds)
+					};
+					fetchUserDetails(successCallback);
+				} else {
+					setName(userDetails?.name || userDetailsLS?.name || "Error")
+					setRollbackSeconds(userDetails?.rollbackSeconds || userDetailsLS?.rollbackSeconds || 0)
+				}
+				isMounted.current = true;
 			}
-			isMounted.current = true;
 		}
-	}, [userDetails])
+	}, [userDetails, isAuthorized])
 
 	const onRollbackChange = ({target: {value}}) => {
 		const successCallback = ({rollbackSeconds}) => {
