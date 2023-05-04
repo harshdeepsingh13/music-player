@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An unconventional player that uses gestures to control the music",
   "main": "server.js",
+  "proxy": "http://localhost:8003",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
